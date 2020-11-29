@@ -1,6 +1,6 @@
 {
 	"id" : "AndroidRemoteControl",
-	"name" : "AndroidRemoteControl",
+	"name" : "Android Remote",
 	"description" : "Plugin pour piloter les Android TV et autres équipements Android",
 	"licence" : "AGPL",
 	"author" : "NextDom [Byackee, Slobberbone]",

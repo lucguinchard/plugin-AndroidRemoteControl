@@ -1,87 +1,175 @@
-<div class="eqLogic eqLogic-widget AndroidRemoteControl AndroidRemoteControl_widget" data-version="#version#" style="overflow:hidden;text-align:center; width: 420px; height:19.34em; padding-bottom:0px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#">
-	<link rel="stylesheet" href="plugins/AndroidRemoteControl/core/template/mobile/css/style.css" />
-	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
+<div class="eqLogic eqLogic-widget noResize AndroidRemoteControl_widget AndroidRemoteControl" data-category="multimedia"
+	 style="width: 250px;height: 340px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;"
+	 data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+	<link rel="stylesheet" href="plugins/AndroidRemoteControl/core/template/dashboard/css/style.css"/>
+	<center class="widget-name">
+		<a class="cmd pull-left" data-cmd_id="#power_state_id#">
+			<i class="fa fa-power-off"></i>
+		</a>
+		<span class="cmd cmd-status pull-right" style="width : 30px;z-index: 1030;"></span>
+		<a href="#eqLink#" style="#hideEqLogicName#">#name_display#</a>
+	</center>
 	<div>
-		<strong style="margin-left:auto;margin-right:auto;#hideEqLogicName#">#name_display# <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></strong>
-		<div class="rightpanel">
-			<div style="margin-right : 7px;overflow: auto;">
-				<legend style="color : white;margin-bottom:2px;">Applications</legend>
-				#applis#
-				<img class="rightRafter2" src="plugins/AndroidRemoteControl/core/template/img/chevron.png" onClick="panelRightClose#id#()"/>
-
-			</div>
-			<img class="rightRafter" style="display:none;"
-				 src="plugins/AndroidRemoteControl/core/template/img/chevron.png" onClick="panelRightClose#id#()"/>
-		</div>
-		<img class="rightRafter" src="plugins/AndroidRemoteControl/core/template/img/chevron.png" onClick="panelRight#id#()"/>
-
-		<div style="margin-top : 5px; height:12em;">
-			<div style="height:8em;">
-				<img src="#thumbnail#" style="margin-left:auto;margin-right:auto;height:100%;border-radius:5%;"/>
-			</div>
-			<div style="height:3.23em;">
-				<span style="font-size:1em;">#title#</span>
-			</div>
-			<div style="background-color:#sub-background-color#;height:6em;margin-top:0.5em;display:block;">
-				<div style="height:3em;">
-					<img class="bouton_bas" style="margin-right:0.2em;opacity: 0.5;" src="plugins/AndroidRemoteControl/core/template/dashboard/images/sound63.png" onclick="soundMenu#id#();"/>
-					<img class="previous cmd" data-cmd_id="#previous_id#"  src="plugins/AndroidRemoteControl/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});"/>
-					<img class="bouton_bas play cmd" data-cmd_id="#play_id#" src="plugins/AndroidRemoteControl/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" style="margin-left:0.32em;" />
-					<img class="bouton_bas pause cmd" data-cmd_id="#pause_id#" src="plugins/AndroidRemoteControl/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" />
-					<img class="bouton_bas cmd" data-cmd_id="#next_id#" src="plugins/AndroidRemoteControl/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});"/>
-				</div>
-				<div style="height:3em;" class="primarySubMenu">
-					<img class="bouton_bas cmd" data-cmd_id="#stop_id#" src="plugins/AndroidRemoteControl/core/template/dashboard/images/stop.png" style="position:relative;top:-3px;" onclick="jeedom.cmd.execute({id: #stop_id#});"/>
-					<a class="bouton_bas mute cmd" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-volume-off"></i></a>
-					<a class="bouton_bas shuffle cmd" data-cmd_id="#mainmenu_id#" onclick="jeedom.cmd.execute({id: #mainmenu_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-home"></i></a>
-					<a class="bouton_bas shuffle cmd" data-cmd_id="#return_id#" onclick="jeedom.cmd.execute({id: #return_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-undo"></i></a>
-				</div>
-				<div style="height:3em;display:none;margin-top:17px;" class="soundMenu">
-					<div class="volume full-width-slider cmd" data-cmd_id="#setVolume_id#" style="width: 96%;text-align: right;min-width : 100px;">
-						<input type="range" min="0" max="100" data-theme="a" value="#volume#"/>
+		<div class="panelBox playlist">
+			<div class="tab-content">
+				<div class="tab-pane panelMusic active" id="#id#pp1">
+					<div class="jaquette">
+						<a class="btn cmd volume_down pull-left" data-cmd_id="#volume_down_id#" title="Volume Down" onclick="jeedom.cmd.execute({id: #volume_down_id#});"><i class="fa fa-volume-down fa-lg"></i></a>
+						<img class="pochette" onclick="screencap#id#()">
+						<a class="btn cmd volume_up pull-right" data-cmd_id="#volume_up_id#"  title="Volume Up" onclick="jeedom.cmd.execute({id: #volume_up_id#});"> <i class="fa fa-volume-up fa-lg"></i></a>
 					</div>
+					<div class="AndroidrcContent"><span class="message">#title#</span> </div>
+
+					<div>
+						<a class="btn cmd" style="display:inline" data-cmd_id="#up_id#" title="Up" onclick="jeedom.cmd.execute({id: #up_id#});"><i class="fa fa-chevron-up"></i></a>
+					</div>
+					<div>
+						<a class="btn cmd" style="display:inline" data-cmd_id="#left_id#" title="Left" onclick="jeedom.cmd.execute({id: #left_id#});"><i class="fa fa-chevron-left"></i></a>
+						<a class="btn cmd" style="display:inline" data-cmd_id="#enter_id#" title="Enter" onclick="jeedom.cmd.execute({id: #enter_id#});"><i class="fa fa-square-o"></i></a>
+						<a class="btn cmd" style="display:inline" data-cmd_id="#right_id#" title="Right" onclick="jeedom.cmd.execute({id: #right_id#});"><i class="fa fa-chevron-right"></i></a>
+					</div>
+					<div>
+						<a class="btn cmd" style="display:inline" data-cmd_id="#down_id#" title="Down" onclick="jeedom.cmd.execute({id: #down_id#});"><i class="fa fa-chevron-down"></i></a>
+					</div>
+					<div class="downpart" style="background: #sub-background-color#;">
+						<div class="commandes">
+							<a class="btn cmd" style="display:#mainmenu_id_display#" data-cmd_id="#mainmenu_id#" title="Home" onclick="jeedom.cmd.execute({id: #mainmenu_id#});"><i class="fa fa-home fa-lg"></i></a>
+							<a class="btn cmd" style="display:#return_id_display#" data-cmd_id="#return_id#" title="Back" onclick="jeedom.cmd.execute({id: #return_id#});"><i class="fa fa-undo fa-lg"></i></a>
+							<a class="btn cmd" style="display:#play_id_display#" data-cmd_id="#play_id#" title="Play/Pause" onclick="jeedom.cmd.execute({id: #play_id#});"></a>
+							<a class="btn cmd" style="display:#stop_id_display#" data-cmd_id="#stop_id#" title="Stop" onclick="jeedom.cmd.execute({id: #stop_id#});"><i class="fa fa-stop fa-lg"></i></a>
+							<a class="btn cmd" style="display:#mute_id_display#" data-cmd_id="#mute_id#" title="Mute" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off fa-lg"></i></a>
+						</div>
+					</div>
+					<div class="volumeDownpart">
+						<div class="volume_AndroidRemoteControl_widget">
+							<span class="cmd" data-cmd_id="#volume_id#"/>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane sound_config" id="#id#pp2">
+				</div>
+			</div>
+			<div class="panelBotton">
+				<a class="nav-item nav-link btn" onclick="$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .displayoff').css('display', 'block'); $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .playlist').css('display', 'none');">
+					<i class="fas fa-arrow-left"></i>
+					<span>Retour</span>
+				</a>
+				#volume_change#
+				<a class="nav-item nav-link btn cmd btn-audio" href="##id#pp2" data-toggle="tab" style="float: right"
+				   onclick="$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .btn-audio').css('display', 'none');$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .btn-back').css('display', 'block');">
+					<i class="fas fa-sliders-h"></i>
+					<span>Audio</span>
+				</a>
+				<a class="nav-item nav-link btn cmd btn-back" href="##id#pp1" data-toggle="tab" style="display: none; float: right"
+				   onclick="$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .btn-back').css('display', 'none');$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .btn-audio').css('display', 'block');">
+					<i class="fas fa-sliders-h"></i>
+					<span>Back</span>
+				</a>
+			</div>
+		</div>
+		<div class="panelBox displayoff">
+			<ul class="nav nav-pills mb-5 nav-justified" id="displayoff-menu-#id#" role="tablist">
+				<li class="nav-item active">
+					<a class="nav-link" id="pills-input-tab-#id#" data-toggle="pill" href="##id#input" role="tab" aria-controls="pills-input" aria-selected="true"><i class="fas fa-sign-in-alt"></i><span>Input</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="pills-info-tab-#id#" data-toggle="pill" href="##id#info" role="tab" aria-controls="pills-info" aria-selected="false"><i class="fas fa-list-alt"></i><span>Info</span></a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane cmd active" id="#id#input" data-cmd_id="#input_id#">
+					#applis#
+				</div>
+				<div class="tab-pane" id="#id#info">
+					<b>nom:</b> #name#<br>
+					<b>type:</b> #type#<br>
+					<b>version:</b> #version_android#<br>
+					<b>résolution:</b> #resolution#<br>
+					<b>disk:</b> #disk_total#Gb  #disk_free# free<br>
+					<b>Niveau batterie:</b> #battery_level# %<br>
+					<b>Statut batterie:</b> #battery_status#<br>
+					<b>statut lecture:</b> #play_state#<br>
+				</div>
+			</div>
+			<div class="panelBotton">
+				<div class="panelMusic">
+					<div class="go-playlist btn" onclick="$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .displayoff').css('display', 'none'); $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .playlist').css('display', 'block');">
+						<div class="divInputPochette">
+							<span class="cmd" data-cmd_id="#encours_id#"><img class="pochette"/></span>
+							<img class="pochette_input" data-cmd_id="#input_id#"/>
+						</div>
+						<div class="divInputIcon">
+						</div>
+						<div class="one-line-defile"><strong class="cmd netusb_track" data-cmd_id="#netusb_track_id#"></strong></div>
+						<div class="one-line-defile artiste-album"><strong class="cmd netusb_artist" data-cmd_id="#netusb_artist_id#"></strong><strong class="cmd netusb_album" data-cmd_id="#netusb_album_id#"></strong></div>
+					</div>
+					<a class="nav-item nav-link btn cmd pause" data-cmd_id="#netusb_playback_id#"
+						onclick="jeedom.cmd.execute({id: #netusb_playback_play_pause_id#});">
+						#netusb_playback_pause_icon#<span>Pause</span>
+					</a>
+					<a class="nav-item nav-link btn cmd play" data-cmd_id="#netusb_playback_id#"
+						onclick="jeedom.cmd.execute({id: #netusb_playback_play_pause_id#});"
+						style="display: none;">#netusb_playback_play_icon#<span>Lecture</span>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script>
-        function soundMenu#id#(){
-            if(!$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .soundMenu').is(':visible')){
-                $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .soundMenu').show();
-                $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .primarySubMenu').hide();
-            }else{
-                $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .soundMenu').hide();
-                $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .primarySubMenu').show();
-            }
-        }
-        $("body").undelegate(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .volume",'slidestop');
-        $("body").delegate(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .volume",'slidestop', function (event, ui) {
-            jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: $(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .volume input").value()}});
-        });
-        if('#repeat_state#' == 1){
-            $(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .repeat").css('color','red');
-        }
-        if('#shuffle_state#' == 1){
-            $(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .shuffle").css('color','red');
-        }
-        if('#mute_state#' == 1){
-            $(".AndroidRemoteControl[data-eqLogic_uid=#uid#] .mute").css('color','red');
-        }
-        if('#state_nb#' == 1){
-            $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .play').remove();
-        }else{
-            $('.AndroidRemoteControl[data-eqLogic_uid=#uid#] .pause').remove();
-        }
+		jeedom.cmd.update['#power_state_id#'] = function(_options){
+			var uid = $('.AndroidRemoteControl[data-eqLogic_uid=#uid#]');
+			if (_options.value == 1) {
+				uid.find('.playlist').css('display', 'block');
+				uid.find('.displayoff .panelMusic').css('display', 'block');
+				uid.find('.displayoff').css('display', 'none');
+			} else {
+				uid.find('.playlist').css('display', 'none');
+				uid.find('.displayoff').css('display', 'block');
+				uid.find('.displayoff .panelMusic').css('display', 'none');
+			}
+			uid.find('a[data-cmd_id=#power_state_id#]').off('click').on('click', function () {
+				jeedom.cmd.execute({id: '#power_set_id#'});
+			});
+		}
+		jeedom.cmd.update['#power_state_id#']({value:'#power_state#'});
 
-        function panelRightClose#id#()
-        {
-            $(".AndroidRemoteControl[data-eqLogic_id=#id#] .rightpanel").animate({right: "-250px"});
-        }
+		jeedom.cmd.update['#play_state_id#'] = function(_options){
+			var uid = $('.AndroidRemoteControl[data-eqLogic_uid=#uid#]');
+			var btnPlay = uid.find('a[data-cmd_id=#play_id#]')
+			if (_options.display_value === 'play') {
+				btnPlay.empty().append('<i class="fa fa-pause fa-lg"></i>');
+			} else {
+				btnPlay.empty().append('<i class="fa fa-play fa-lg"></i>');
+			}
+		}
+		jeedom.cmd.update['#play_state_id#']({display_value:'#play_state#'});
 
-        function panelRight#id#()
-        {
-            $(".AndroidRemoteControl[data-eqLogic_id=#id#] .rightpanel").animate({right: "0px"});
-        }
+		jeedom.cmd.update['#volume_id#'] = function(_options){
+			$('.AndroidRemoteControl[data-eqLogic_uid=#uid#] span[data-cmd_id=#volume_id#]').empty().append(_options.display_value);
+		}
+		jeedom.cmd.update['#volume_id#']({display_value:'#volume#'});
+
+		jeedom.cmd.update['#encours_id#'] = function(_options){
+			var uid = $('.AndroidRemoteControl[data-eqLogic_uid=#uid#]');
+			uid.find('.pochette').attr('src', 'plugins/AndroidRemoteControl/desktop/images/' + _options.display_value + '.png');
+		}
+		jeedom.cmd.update['#encours_id#']({display_value:'#encours#'});
+
+		function screencap#id#()
+		{
+		$('#md_modal').dialog({
+		width : 850,
+				height: 540,
+				autoOpen: false,
+				modal: true,
+				refresh: true,
+				closeOnEscape: true,
+				resizable: false,
+				title: '#name_display# - Capture d’écran'
+		});
+		$('#md_modal').load('index.php?v=d&plugin=AndroidRemoteControl&modal=screencap.AndroidRemoteControl&id=#id#&ip=#ip#');
+		$('#md_modal').dialog('open');
+		}
 	</script>
 </div>

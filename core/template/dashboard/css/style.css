@@ -1,240 +1,92 @@
-.AndroidRemoteControl_widget {
-    width: 250px;
-    height: 340px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: black;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
+.AndroidRemoteControl_widget .widget-name .cmd {
+	margin-top: 3px !important;
+	padding: 0px 4px;
 }
 
-.AndroidRemoteControl_widget .uppart {
-    height: 280px;
-    width: 250px;
-    z-index: 2;
+.AndroidRemoteControl_widget .widget-name .cmd i {
+	font-size: 12px !important;
 }
 
-.AndroidRemoteControl_widget .power_set {
-    position: absolute;
-    top: 2px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 0;
-}
-
-.AndroidRemoteControl_widget .reboot {
-    position: absolute;
-    top: 2px;
-    left: 5px;
-    cursor: pointer;
-    z-index: 0;
-}
-
-.AndroidRemoteControl_widget .title {
-    font-size: 1.5em;
-    font-weight: bold;
-    z-index: 2;
-}
-
-.AndroidRemoteControl_widget .jaquette {
-    width: 250px;
-    height: 160px;
-}
-
-.AndroidRemoteControl_widget .affiche {
-    width: 150px;
-    height: auto;
-    position: absolute;
-    margin-left: -95px;
-    z-index: 7;
-    border-radius: 10%;
-}
-
-.AndroidRemoteControl_widget .affiche:hover {
-    width: 150px;
-    height: auto;
-    position: absolute;
-    margin-left: -95px;
-    z-index: 7;
-    border-radius: 10%;
-  	filter:blur(5px);
-}
-
-.AndroidRemoteControl_widget .icons img{
-  	margin-top: 2px;
-    border-radius: 10%;
-   	width: 35px;
-	height: auto;
-    z-index: 7;
-}
-
-.AndroidRemoteControl_widget .commandes{
-  	padding-top:5px;
-}
-
-.AndroidRemoteControl_widget .leftpanel {
-    text-align: left;
-    width: 250px;
-    height: 327px;
-    float: left;
-    position: absolute;
-    z-index: 10;
-    left: -250px;
-	background: rgba(0, 0, 0, 0.7);
-}
-
-.AndroidRemoteControl_widget .rightpanel {
-  padding-left: 20px;
-    width: 250px;
-    height: 327px;
-    float: left;
-    position: absolute;
-    z-index: 10;
-    right: -250px;
-    background: rgba(0, 0, 0, 0.9);
-}
-
-.AndroidRemoteControl_widget .leftRafter {
-    width: 15px;
-    height: 40px;
-    position: absolute;
-    top: 143.5px;
-    left: 5px;
-    cursor: pointer;
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    z-index: 4;
-    opacity: 0.3;
-}
-
-.AndroidRemoteControl_widget .leftRafter2 {
-    width: 15px;
-    height: 40px;
-    position: absolute;
-    top: 143.5px;
-    right: 5px;
-    cursor: pointer;
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    z-index: 4;
-    opacity: 0.6;
-}
-.AndroidRemoteControl_widget .leftRafter:hover {
-    opacity: 1;
-}
-.AndroidRemoteControl_widget .leftRafter2:hover {
-    opacity: 1;
-}
-
-.AndroidRemoteControl_widget .leftpanel .leftRafter2 {
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-}
-
-.AndroidRemoteControl_widget .rightRafter {
-    width: 15px;
-    height: 40px;
-    position: absolute;
-    top: 143.5px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 4;
-    opacity: 0.3;
-}
-
-.AndroidRemoteControl_widget .rightRafter2 {
-    width: 15px;
-    height: 40px;
-    position: absolute;
-    top: 143.5px;
-    left: 5px;
-    cursor: pointer;
-    z-index: 4;
-    opacity: 0.6;
-}
-
-.AndroidRemoteControl_widget .rightRafter:hover {
-    opacity: 1;
-}
-.AndroidRemoteControl_widget .rightRafter2:hover {
-    opacity: 1;
-}
-
-.AndroidRemoteControl_widget .rightpanel .rightRafter {
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-}
-
-.AndroidRemoteControl_widget .rightpanel .rightRafter2 {
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-}
-
-.AndroidRemoteControl_widget .info_data{
-    font-size: 1em;
-}
-
-.AndroidRemoteControl_widget .downpart {
-    height: 40px;
-    width: 250px;
-}
-
-.AndroidRemoteControl_widget .AndroidrcContent {
-	display: block;
-	margin-left: 30px;
-	overflow: hidden;
+.AndroidRemoteControl_widget .panelBox {
 	position: relative;
-	table-layout: fixed;
-	width: 200px;
-	height: 20px;
+	height: inherit;
+	overflow: auto;
+	padding: 5px 10px;
 }
-.AndroidRemoteControl_widget .message {
+
+
+.AndroidRemoteControl_widget a.nav-item.nav-link {
+	border: black solid 1px !important;
+	padding: 5px 3px 1px 3px;
+	margin: 1px;
+	display: inline-block;
+	width: 45px;
+	text-align: center;
+	font-weight: 600;
+	height: 45px;
+	max-height: 45px;
+}
+
+
+.AndroidRemoteControl_widget a.nav-item.nav-link img{
+	max-height: 25px;
+	max-width: 25px;
+}
+
+.AndroidRemoteControl_widget .nav>li>a {
+	padding: 10px 5px;
+}
+
+.AndroidRemoteControl_widget .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+	color: #fff !important;
+}
+
+.AndroidRemoteControl_widget nav.nav.nav-tabs {
+	height: 50px;
+	padding: 0px 8px;
+}
+
+.AndroidRemoteControl_widget .nav-item span {
 	display: block;
-	margin-left: -10%;
-	font-size: 1.2rem;
-	text-align: left;
-	animation: defilement 20s infinite linear;
+	font-size: 8px;
 }
-.AndroidRemoteControl_widget .message:after {
-	content: attr(data-text);
-	position: absolute;
-	white-space: nowrap;
-	padding-left: 10px;
+.AndroidRemoteControl_widget .nav-item i {
+	font-size: 1.5em;
 }
- @keyframes defilement {
- 0%, 100% {
-margin-left:0;
-}
- 99.99% {
-margin-left:-100%;
-}
+.AndroidRemoteControl_widget .displayoff .tab-content {
+	height: 210px;
 }
 
-.AndroidRemoteControl_widget .volume_musiccast_widget {
-    position: absolute;
-    width: 250px;
-    bottom: 15px;
+.AndroidRemoteControl_widget .panelMusic {
+	text-align: center;
 }
 
-.AndroidRemoteControl_widget .bouton_sup_volume {
-    opacity: 0.5;
-    cursor: pointer;
-    position: absolute;
-    bottom: 55px;
-    left: 5px;
+.AndroidRemoteControl_widget .tooltipstered, .tooltipstered img {
+	width: 30px;
 }
 
-.AndroidRemoteControl_widget .volumeDownpart {
-    height: 40px;
-    width: 250px;
-    z-index: 7;
+.AndroidRemoteControl_widget .playlist .pochette {
+	height: 170px;
+	margin: 5px;
+	/*border-radius: 10%;*/
 }
 
-.AndroidRemoteControl_widget .slider.slider-horizontal{
-  margin-top: 10px;
+.AndroidRemoteControl_widget .displayoff .panelMusic img.pochette {
+	height: 40px;
+	float: left;
+}
+
+
+.AndroidRemoteControl_widget .displayoff .go-playlist {
+	float: left;
+	width: 200px;
+	max-height: 45px;
+	height: 45px;
+	border: black solid 1px !important;
+	padding: 2px;
+	margin: 1px;
+}
+
+.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active i,.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active span {
+	color: darkslateblue;
 }
