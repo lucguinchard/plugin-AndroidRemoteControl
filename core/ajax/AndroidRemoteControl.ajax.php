@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This file is part of the NextDom software (https://github.com/NextDom or http://nextdom.github.io).
  * Copyright (c) 2018 NextDom.
@@ -19,33 +18,34 @@
  */
 
 try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-    include_file('core', 'authentification', 'php');
+	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+	include_file('core', 'authentification', 'php');
 
-    if (!isConnect('admin')) {
-        throw new \Exception(__('401 - Accès non autorisé', __FILE__));
-    }
-        $ipaddress = init('params');
+	if (!isConnect('admin')) {
+		throw new \Exception(__('401 - Accès non autorisé', __FILE__));
+	}
 
-	if (init('action') == 'connect') {
-            	log::add('AndroidRemoteControl', 'debug', 'connection encours a ' . $ipaddress);
+	$action = init('action');
+	switch($action) {
+		case 'connect':
+			$ipaddress = init('params');
+			log::add('AndroidRemoteControl', 'debug', 'Connection en cours à ' . $ipaddress);
 
-      	AndroidRemoteControl::connectADB($ipaddress);
-      			ajax::success();
-    }
+			AndroidRemoteControl::connectADB($ipaddress);
+			ajax::success();
+			break;
+		case 'resetADB':
+			log::add('AndroidRemoteControl', 'debug', '==== reset encours ====');
+			AndroidRemoteControl::resetADB();
+			ajax::success();
+			break;
+	}
 
-    if (init('action') == 'resetADB') {
-            	log::add('AndroidRemoteControl', 'debug', '==== reset encours ====');
-      	AndroidRemoteControl::resetADB();
-      			ajax::success();
-    }
-
-   throw new \Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
+	throw new \Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 } catch (\Exception $e) {
-    if (function_exists('displayException')) {
-        ajax::error(displayException($e), $e->getCode());
-    }
-    else {
-        ajax::error(displayExeption($e), $e->getCode());
-    }
+	if (function_exists('displayException')) {
+		ajax::error(displayException($e), $e->getCode());
+	} else {
+		ajax::error(displayExeption($e), $e->getCode());
+	}
 }

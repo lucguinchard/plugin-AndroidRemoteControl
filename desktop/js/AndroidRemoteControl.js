@@ -17,6 +17,17 @@
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 $("#table_app").sortable({axis: "y", cursor: "move", items: ".app", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
+$("#bt_serviceLog").click(function () {
+	$('#md_modal').dialog({title: "{{Logs}}"});
+	$('#md_modal').load('index.php?v=d&plugin=AndroidRemoteControl&modal=log.AndroidRemoteControl').dialog('open');
+});
+
+$("#bt_configureAdb").click(function () {
+	$('#md_modal').dialog({title: "{{Configuration de votre appareil Android}}"});
+	$('#md_modal').load('index.php?v=d&plugin=AndroidRemoteControl&modal=configureadb.AndroidRemoteControl').dialog('open');
+});
+
 /*
 * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
 */
@@ -68,12 +79,11 @@ function addCmdToTable(_cmd) {
     }else if (_cmd.configuration.categorie == "appli") {
         var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
         tr += '<td style="width: 60px;">';
-        tr += '<img src="plugins/AndroidRemoteControl/desktop/images/'+ _cmd.configuration.icon +'" style="width:30px"; height:"30px"></a>';
+        tr += '<img src="plugins/AndroidRemoteControl/desktop/images/'+ _cmd.logicalId +'.png" style="width:30px"; height:"30px"></a>';
         tr += '</td>';
         tr += '<td style="width: 400px;">';
         tr += '<span class="cmdAttr" data-l1key="id" style="display:none;"></span>';
         tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width: 90%;display: inherit" placeholder="{{Nom}}">';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="icon" style="width: 90%;display: " value="unknown.png" placeholder="{{icon}}"></input>';
         tr += '</td>';
         tr += '<td style="width: 100px;" class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType();
         tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span></td>';

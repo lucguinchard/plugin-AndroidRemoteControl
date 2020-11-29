@@ -1,147 +1,188 @@
 [
-  {
-    "name": "disk_total",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "disk_free",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "resolution",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "type",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "version_android",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "name",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "power_state",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "binary"
-  },{
-    "name": "encours",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "title",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "play_state",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "battery_level",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "numeric"
-  },{
-    "name": "battery_status",
-    "type": "info",
-    "categorie": "commande",
-    "subtype": "string"
-  },{
-    "name": "mainmenu",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 3"
-  },{
-    "name": "power_set",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 26"
-  },{
-    "name": "play",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 85"
-  },{
-    "name": "stop",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 86"
-  },{
-    "name": "up",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 19"
-  },{
-    "name": "down",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 20"
-  },{
-    "name": "left",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 21"
-  },{
-    "name": "right",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 22"
-  },{
-    "name": "return",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 4"
-  },{
-    "name": "enter",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 23"
-  },{
-    "name": "volume+",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 24"
-  },{
-    "name": "volume-",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 25"
-  },{
-    "name": "mute",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell input keyevent 164"
-  },{
-    "name": "reboot",
-    "type": "action",
-    "subtype": "other",
-    "categorie": "commande",
-    "commande": "shell reboot"
-  }
+	{
+		"id": "disk_total",
+		"name": "disk_total",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "disk_free",
+		"name": "disk_free",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "resolution",
+		"name": "resolution",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "type",
+		"name": "type",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "version_android",
+		"name": "version_android",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "name",
+		"name": "name",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "power_state",
+		"name": "power_state",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "binary"
+	}, {
+		"id": "encours",
+		"name": "encours",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "title",
+		"name": "title",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "play_state",
+		"name": "play_state",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "battery_level",
+		"name": "battery_level",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "numeric"
+	}, {
+		"id": "battery_status",
+		"name": "battery_status",
+		"type": "info",
+		"categorie": "commande",
+		"subtype": "string"
+	}, {
+		"id": "mainmenu",
+		"name": "mainmenu",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 3"
+	}, {
+		"id": "power_set",
+		"name": "power_set",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 26"
+	}, {
+		"id": "play",
+		"name": "play",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 85"
+	}, {
+		"id": "stop",
+		"name": "stop",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 86"
+	}, {
+		"id": "up",
+		"name": "up",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 19"
+	}, {
+		"id": "down",
+		"name": "down",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 20"
+	}, {
+		"id": "left",
+		"name": "left",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 21"
+	}, {
+		"id": "right",
+		"name": "right",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 22"
+	}, {
+		"id": "return",
+		"name": "return",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 4"
+	}, {
+		"id": "enter",
+		"name": "enter",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 23"
+	}, {
+		"id": "volume_up",
+		"name": "Volume Up",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 24"
+	}, {
+		"id": "volume_down",
+		"name": "Volume Down",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 25"
+	}, {
+		"id": "mute",
+		"name": "mute",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell input keyevent 164"
+	}, {
+		"id": "reboot",
+		"name": "reboot",
+		"type": "action",
+		"subtype": "other",
+		"categorie": "commande",
+		"commande": "shell reboot"
+	}, {
+		"id": "volume",
+		"name": "volume",
+		"type": "info",
+		"subtype": "numeric",
+		"unit": "%",
+		"categorie": "commande",
+		"commande": "shell reboot"
+	}, {
+		"id": "volume_set",
+		"name": "volume_set",
+		"type": "action",
+		"subtype": "slider",
+		"categorie": "commande",
+		"commande": "shell reboot"
+	}
 ]
