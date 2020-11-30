@@ -74,8 +74,7 @@ $eqLogicList = eqLogic::byType($plugin->getId());
 		</a>
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation">
-				<a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab"
-				   data-action="returnToThumbnailDisplay">
+				<a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay">
 					<i class="fa fa-arrow-circle-left"></i>
 				</a>
 			</li>
@@ -84,11 +83,15 @@ $eqLogicList = eqLogic::byType($plugin->getId());
 					<i class="fas fa-tachometer-alt"></i> {{Equipement}}
 				</a>
 			</li>
-			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab">
-					<i class="fa fa-list-alt"></i> {{Commandes}}</a>
+			<li role="presentation">
+				<a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab">
+					<i class="fa fa-list-alt"></i> {{Commandes}}
+				</a>
 			</li>
-			<li role="presentation"><a href="#apptab" aria-controls="profile" role="tab" data-toggle="tab">
-					<i class="fa fa-list-alt"></i> {{Liste des applications}}</a>
+			<li role="presentation">
+				<a href="#apptab" aria-controls="profile" role="tab" data-toggle="tab">
+					<i class="fa fa-icons"></i> {{Liste des applications}}
+				</a>
 			</li>
 		</ul>
 		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -105,52 +108,49 @@ $eqLogicList = eqLogic::byType($plugin->getId());
 								<fieldset>
 									<legend>{{Général}}</legend>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
-										<div class="col-sm-3">
+										<label class="col-sm-5 control-label">{{Nom de l'équipement}}</label>
+										<div class="col-sm-7">
 											<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 											<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label" >{{Objet parent}}</label>
-										<div class="col-sm-3">
+										<label class="col-sm-5 control-label" >{{Objet parent}}</label>
+										<div class="col-sm-7">
 											<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 												<option value="">{{Aucun}}</option>
-												<?php
-												foreach (jeeObject::all() as $object) {
-													echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
-												}
-												?>
+												<?php foreach (jeeObject::all() as $object) { ?>
+													<option value="<?= $object->getId() ?>"><?= $object->getName() ?></option>
+												<?php } ?>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">{{Catégorie}}</label>
-										<div class="col-sm-9">
-											<?php
-											foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
-												echo '<label class="checkbox-inline">';
-												echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
-												echo '</label>';
-											}
-											?>
+										<label class="col-sm-5 control-label">{{Catégorie}}</label>
+										<div class="col-sm-7">
+											<?php foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) { ?>
+												<label class="checkbox-inline">
+													<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="<?= $key ?>" /> <?= $value['name'] ?>
+												</label>
+											<?php } ?>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">{{Commentaire}}</label>
-										<div class="col-sm-3">
+										<label class="col-sm-5 control-label">{{Commentaire}}</label>
+										<div class="col-sm-7">
 											<textarea class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire" ></textarea>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label"></label>
-										<div class="col-md-8">
+										<label class="col-md-5 control-label"></label>
+										<div class="col-md-7">
 											<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 											<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 										</div>
 									</div>
 
 								</fieldset>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -163,42 +163,40 @@ $eqLogicList = eqLogic::byType($plugin->getId());
 							<form class="form-horizontal">
 								<fieldset>
 									<legend>{{Paramètres}}</legend>
-									<div class="form-group col-sm-12">
-										<label class="col-sm-3 control-label">{{Assistant}}</label>
-										<div class="col-sm-3">
+									<div class="form-group">
+										<label class="col-sm-5 control-label">{{Assistant}}</label>
+										<div class="col-sm-7">
 											<a class="btn btn-infos" id="bt_configureAdb"><i class="fa fa-android"></i> {{Connecter un appareil Android}}
 											</a>
 										</div>
 									</div>
-									<div class="form-group col-sm-12">
-										<label class="col-sm-3 control-label">{{Methode de connection}}</label>
-										<div class="col-sm-6">
-											<select class="eqLogicAttr form-control tooltips" data-l1key="configuration" data-l2key="type_connection" title="{{Veuillez préciser la methode de connection our votre appareil.}}">
+									<div class="form-group">
+										<label class="col-sm-5 control-label">{{Methode de connection}}</label>
+										<div class="col-sm-7">
+											<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type_connection" title="{{Veuillez préciser la methode de connection our votre appareil.}}">
 												<option value="TCPIP">TCPIP</option>
 												<option value="USB">USB</option>
 											</select>
 										</div>
-
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">{{Adresse IP}}</label>
-										<div class="col-sm-3">
+										<label class="col-sm-5 control-label">{{Adresse IP}}</label>
+										<div class="col-sm-7">
 											<input id="ip_address" data-inputmask="'alias': 'ip'" data-mask="" type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ip_address"/>
 										</div>
 									</div>
-
 								</fieldset>
 								</br>
 								<fieldset>
 									<legend>{{Informations}}</legend>
 									<div class="alert alert-info">
-										{{Le choix de la connexion dépend principalement de votre appareil Android. Il y a des avantages et inconvénients pour chaque:<br>
-										- USB: nécessite un cable et par conséquent que votre Android soit à proximité de votre Jeedom<br>
-										- ADB: Ne nécessite aucune application tierce sur votre Android mais en fonction des équipements la connexion peut être capricieuse<br>
-										- SSH: A venir (en cours d'étude de faisabilité)<br>}}
+										{{Le choix de la connexion dépend principalement de votre appareil Android. Il y a des avantages et inconvénients pour chaque :<br>
+										- USB : nécessite un cable et par conséquent que votre Android soit à proximité de votre Jeedom<br>
+										- ADB : Ne nécessite aucune application tierce sur votre Android mais en fonction des équipements la connexion peut être capricieuse<br>
+										- SSH : A venir (en cours d’étude de faisabilité)<br>}}
 									</div>
 									<div class="alert alert-danger">
-										{{Si vous choisissez la connexion USB, seul 1 périphérique peut être contrôlé. Le plugin ne gère pas la connexion USB et TCPIP en même temps}}
+										{{Si vous choisissez la connexion USB, un seul périphérique peut-être contrôlé. Le plugin ne gère pas la connexion USB et TCPIP en même temps}}
 									</div>
 								</fieldset>
 							</form>
