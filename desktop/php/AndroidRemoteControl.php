@@ -62,7 +62,7 @@ $eqLogicList = eqLogic::byType($plugin->getId());
 		<?php } ?>
 	</div>
 
-	<div class="col-lg-10 col-md-9 col-sm-8 eqLogic"
+	<div class="col-xs-12 eqLogic"
 		 style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 		<a class="btn btn-success eqLogicAction pull-right" data-action="save">
 			<i class="fa fa-check-circle"></i> {{Sauvegarder}}
