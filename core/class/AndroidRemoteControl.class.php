@@ -162,34 +162,37 @@ class AndroidRemoteControl extends eqLogic {
 	}
 
 	public function getInfo() {
-		$this->checkAndroidRemoteControlStatus();
-
-		$power_state = substr($this->runcmd("shell dumpsys power -h | grep \"Display Power\" | cut -c22-"), 0, -1);
-		log::add(__CLASS__, 'debug', "power_state: " . $power_state);
-		$encours = substr($this->runcmd("shell dumpsys window windows | grep -E 'mFocusedApp'| cut -d / -f 1 | cut -d ' ' -f 7"), 0, -1);
-		log::add(__CLASS__, 'debug', "encours: " . $encours);
-		$version_android = substr($this->runcmd("shell getprop ro.build.version.release"), 0, -1);
-		log::add(__CLASS__, 'debug', "version_android: " . $version_android);
-		$name = substr($this->runcmd("shell getprop ro.product.model"), 0, -1);
-		log::add(__CLASS__, 'debug', "name: " . $name);
-		$type = substr($this->runcmd("shell getprop ro.build.characteristics"), 0, -1);
-		log::add(__CLASS__, 'debug', "type: " . $type);
-		$resolution = substr($this->runcmd("shell dumpsys window displays | grep init | cut -c45-53"), 0, -1);
-		log::add(__CLASS__, 'debug', "resolution: " . $resolution);
-		$disk_free = substr($this->runcmd("shell dumpsys diskstats | grep Data-Free | cut -d' ' -f7"), 0, -1);
-		log::add(__CLASS__, 'debug', "disk_free: " . $disk_free);
-		$disk_total = round(substr($this->runcmd("shell dumpsys diskstats | grep Data-Free | cut -d' ' -f4"), 0, -1) / 1000000, 1);
-		log::add(__CLASS__, 'debug', "disk_total: " . $disk_total);
-		$title = substr($this->runcmd("shell dumpsys bluetooth_manager | grep MediaPlayerInfo | grep .$encours. |cut -d')' -f3 | cut -d, -f1 | grep -v null | sed 's/^\ *//g'"), 0);
-		log::add(__CLASS__, 'debug', "title: " . $title);
-		$volume = substr($this->runcmd("shell media volume --stream 3 --get | grep volume |grep is | cut -d\ -f4"), 0, -1);
-		log::add(__CLASS__, 'debug', "volume: " . $volume);
-		$play_state = substr($this->runcmd("shell dumpsys bluetooth_manager | grep mCurrentPlayState | cut -d,  -f1 | cut -c43-"), 0, -1);
-		log::add(__CLASS__, 'debug', "play_state: " . $play_state);
-		$battery_level = substr($this->runcmd("shell dumpsys battery | grep level | cut -d: -f2"), 0, -1);
-		log::add(__CLASS__, 'debug', "battery_level: " . $battery_level);
-		$battery_status = substr($this->runcmd("shell dumpsys battery | grep status"), -3);
-		log::add(__CLASS__, 'debug', "battery_status: " . $battery_status);
+		$isConnect = $this->checkAndroidRemoteControlStatus();
+		if(!$isConnect) {
+			return null;
+		} else {
+			$power_state = substr($this->runcmd(" "), 0, -1);
+			log::add(__CLASS__, 'debug', "power_state: " . $power_state);
+			$encours = substr($this->runcmd("shell dumpsys window windows | grep -E 'mFocusedApp'| cut -d / -f 1 | cut -d ' ' -f 7"), 0, -1);
+			log::add(__CLASS__, 'debug', "encours: " . $encours);
+			$version_android = substr($this->runcmd("shell getprop ro.build.version.release"), 0, -1);
+			log::add(__CLASS__, 'debug', "version_android: " . $version_android);
+			$name = substr($this->runcmd("shell getprop ro.product.model"), 0, -1);
+			log::add(__CLASS__, 'debug', "name: " . $name);
+			$type = substr($this->runcmd("shell getprop ro.build.characteristics"), 0, -1);
+			log::add(__CLASS__, 'debug', "type: " . $type);
+			$resolution = substr($this->runcmd("shell dumpsys window displays | grep init | cut -c45-53"), 0, -1);
+			log::add(__CLASS__, 'debug', "resolution: " . $resolution);
+			$disk_free = substr($this->runcmd("shell dumpsys diskstats | grep Data-Free | cut -d' ' -f7"), 0, -1);
+			log::add(__CLASS__, 'debug', "disk_free: " . $disk_free);
+			$disk_total = round(substr($this->runcmd("shell dumpsys diskstats | grep Data-Free | cut -d' ' -f4"), 0, -1) / 1000000, 1);
+			log::add(__CLASS__, 'debug', "disk_total: " . $disk_total);
+			$title = substr($this->runcmd("shell dumpsys bluetooth_manager | grep MediaPlayerInfo | grep .$encours. |cut -d')' -f3 | cut -d, -f1 | grep -v null | sed 's/^\ *//g'"), 0);
+			log::add(__CLASS__, 'debug', "title: " . $title);
+			$volume = substr($this->runcmd("shell media volume --stream 3 --get | grep volume |grep is | cut -d\ -f4"), 0, -1);
+			log::add(__CLASS__, 'debug', "volume: " . $volume);
+			$play_state = substr($this->runcmd("shell dumpsys bluetooth_manager | grep mCurrentPlayState | cut -d,  -f1 | cut -c43-"), 0, -1);
+			log::add(__CLASS__, 'debug', "play_state: " . $play_state);
+			$battery_level = substr($this->runcmd("shell dumpsys battery | grep level | cut -d: -f2"), 0, -1);
+			log::add(__CLASS__, 'debug', "battery_level: " . $battery_level);
+			$battery_status = substr($this->runcmd("shell dumpsys battery | grep status"), -3);
+			log::add(__CLASS__, 'debug', "battery_status: " . $battery_status);
+		}
 
 		return array('power_state' => $power_state, 'encours' => $encours, 'version_android' => $version_android, 'name' => $name, 'type' => $type, 'resolution' => $resolution, 'disk_total' => $disk_total, 'disk_free' => $disk_free, 'title' => $title, 'volume' => $volume, 'play_state' => $play_state, 'battery_level' => $battery_level, 'battery_status' => $battery_status);
 	}
@@ -197,95 +200,94 @@ class AndroidRemoteControl extends eqLogic {
 	public function updateInfo() {
 		try {
 			$infos = $this->getInfo();
-		} catch (\Exception $e) {
-			return;
-		}
-
-		if (!is_array($infos)) {
-			return;
-		}
-		log::add(__CLASS__, 'info', 'Rafraichissement des informations');
-		if (isset($infos['power_state'])) {
-			$this->checkAndUpdateCmd('power_state', ($infos['power_state'] == "ON") ? 1 : 0 );
-		}
-		if (isset($infos['encours'])) {
-			$this->checkAndUpdateCmd('encours', $infos['encours']);
-			$cmd = $this->getCmd(null, $infos['encours']);
-			if (!is_object($cmd)) {
-				$json_appli_list = json_decode(file_get_contents(__DIR__ . '/../../3rdparty/appli.json'));
-				$appli_found = false;
-				foreach ($json_appli_list as $json_cmd) {
-					if ($infos['encours'] == $json_cmd->id) {
-						$appli_found = true;
-						$configurationList['categorie'] =  $json_cmd->categorie;
-						$configurationList['icon'] =  $json_cmd->icon;
-						$configurationList['commande'] =  $json_cmd->commande;
-						$this->createCmd($json_cmd->id, $json_cmd->name, $json_cmd->type, $json_cmd->subtype, false, null, $configurationList)->save();
-						log::add(__CLASS__, 'info', 'Nouvelle commande application ' . $infos['encours'] . ' crée.');
-						break;
+			if (!is_array($infos)) {
+				return;
+			}
+			log::add(__CLASS__, 'info', 'Rafraichissement des informations');
+			if (isset($infos['power_state'])) {
+				$this->checkAndUpdateCmd('power_state', ($infos['power_state'] == "ON") ? 1 : 0 );
+			}
+			if (isset($infos['encours'])) {
+				$this->checkAndUpdateCmd('encours', $infos['encours']);
+				$cmd = $this->getCmd(null, $infos['encours']);
+				if (!is_object($cmd)) {
+					$json_appli_list = json_decode(file_get_contents(__DIR__ . '/../../3rdparty/appli.json'));
+					$appli_found = false;
+					foreach ($json_appli_list as $json_cmd) {
+						if ($infos['encours'] == $json_cmd->id) {
+							$appli_found = true;
+							$configurationList['categorie'] =  $json_cmd->categorie;
+							$configurationList['icon'] =  $json_cmd->icon;
+							$configurationList['commande'] =  $json_cmd->commande;
+							$this->createCmd($json_cmd->id, $json_cmd->name, $json_cmd->type, $json_cmd->subtype, false, null, $configurationList)->save();
+							log::add(__CLASS__, 'info', 'Nouvelle commande application ' . $infos['encours'] . ' crée.');
+							break;
+						}
+					}
+					if(!$appli_found) {
+						$configurationList['categorie'] = "appli";
+						$configurationList['icon'] = '<i class="fa fa-cogs"></i>';
+						$configurationList['commande'] = "shell monkey -p " . $infos['encours'] . " -c android.intent.category.LAUNCHER 1";
+						$this->createCmd($infos['encours'], $infos['encours'], "action", "other", false, null, $configurationList)->save();
+						log::add(__CLASS__, 'warning', 'Nouvelle commande application ' . $infos['encours'] . ' doit être crée.');
 					}
 				}
-				if(!$appli_found) {
-					$configurationList['categorie'] = "appli";
-					$configurationList['icon'] = '<i class="fa fa-cogs"></i>';
-					$configurationList['commande'] = "shell monkey -p " . $infos['encours'] . " -c android.intent.category.LAUNCHER 1";
-					$this->createCmd($infos['encours'], $infos['encours'], "action", "other", false, null, $configurationList)->save();
-					log::add(__CLASS__, 'warning', 'Nouvelle commande application ' . $infos['encours'] . ' doit être crée.');
+			}
+			if (isset($infos['version_android'])) {
+				$this->checkAndUpdateCmd('version_android', $infos['version_android']);
+			}
+			if (isset($infos['name'])) {
+				$this->checkAndUpdateCmd('name', $infos['name']);
+			}
+
+			if (isset($infos['type'])) {
+				$this->checkAndUpdateCmd('type', $infos['type']);
+			}
+			if (isset($infos['resolution'])) {
+				$this->checkAndUpdateCmd('resolution', $infos['resolution']);
+			}
+			if (isset($infos['disk_free'])) {
+				$this->checkAndUpdateCmd('disk_free', $infos['disk_free']);
+			}
+			if (isset($infos['disk_total'])) {
+				$this->checkAndUpdateCmd('disk_total', $infos['disk_total']);
+			}
+			if (isset($infos['title'])) {
+				$this->checkAndUpdateCmd('title', $infos['title']);
+			}
+			if (isset($infos['volume'])) {
+				$this->checkAndUpdateCmd('volume', $infos['volume']);
+			}
+			if (isset($infos['play_state'])) {
+				if ($infos['play_state'] == 2) {
+					$this->checkAndUpdateCmd('play_state', "pause");
+				} elseif ($infos['play_state'] == 3) {
+					$this->checkAndUpdateCmd('play_state', "lecture");
+				} elseif ($infos['play_state'] == 0) {
+					$this->checkAndUpdateCmd('play_state', "arret");
+				} else {
+					$this->checkAndUpdateCmd('play_state', "inconnue");
 				}
 			}
-		}
-		if (isset($infos['version_android'])) {
-			$this->checkAndUpdateCmd('version_android', $infos['version_android']);
-		}
-		if (isset($infos['name'])) {
-			$this->checkAndUpdateCmd('name', $infos['name']);
-		}
 
-		if (isset($infos['type'])) {
-			$this->checkAndUpdateCmd('type', $infos['type']);
-		}
-		if (isset($infos['resolution'])) {
-			$this->checkAndUpdateCmd('resolution', $infos['resolution']);
-		}
-		if (isset($infos['disk_free'])) {
-			$this->checkAndUpdateCmd('disk_free', $infos['disk_free']);
-		}
-		if (isset($infos['disk_total'])) {
-			$this->checkAndUpdateCmd('disk_total', $infos['disk_total']);
-		}
-		if (isset($infos['title'])) {
-			$this->checkAndUpdateCmd('title', $infos['title']);
-		}
-		if (isset($infos['volume'])) {
-			$this->checkAndUpdateCmd('volume', $infos['volume']);
-		}
-		if (isset($infos['play_state'])) {
-			if ($infos['play_state'] == 2) {
-				$this->checkAndUpdateCmd('play_state', "pause");
-			} elseif ($infos['play_state'] == 3) {
-				$this->checkAndUpdateCmd('play_state', "lecture");
-			} elseif ($infos['play_state'] == 0) {
-				$this->checkAndUpdateCmd('play_state', "arret");
-			} else {
-				$this->checkAndUpdateCmd('play_state', "inconnue");
+			if (isset($infos['battery_level'])) {
+				$this->checkAndUpdateCmd('battery_level', $infos['battery_level']);
 			}
-		}
-
-		if (isset($infos['battery_level'])) {
-			$this->checkAndUpdateCmd('battery_level', $infos['battery_level']);
-		}
-		if (isset($infos['battery_status'])) {
-			if ($infos['battery_status'] == 2) {
-				$this->checkAndUpdateCmd('battery_status', "en charge");
-			} elseif ($infos['battery_status'] == 3) {
-				$this->checkAndUpdateCmd('battery_status', "en décharge");
-			} elseif ($infos['battery_status'] == 4) {
-				$this->checkAndUpdateCmd('battery_status', "pas de charge");
-			} elseif ($infos['battery_status'] == 5) {
-				$this->checkAndUpdateCmd('battery_status', "pleine");
-			} else {
-				$this->checkAndUpdateCmd('battery_status', "inconnue");
+			if (isset($infos['battery_status'])) {
+				if ($infos['battery_status'] == 2) {
+					$this->checkAndUpdateCmd('battery_status', "en charge");
+				} elseif ($infos['battery_status'] == 3) {
+					$this->checkAndUpdateCmd('battery_status', "en décharge");
+				} elseif ($infos['battery_status'] == 4) {
+					$this->checkAndUpdateCmd('battery_status', "pas de charge");
+				} elseif ($infos['battery_status'] == 5) {
+					$this->checkAndUpdateCmd('battery_status', "pleine");
+				} else {
+					$this->checkAndUpdateCmd('battery_status', "inconnue");
+				}
 			}
+		} catch (\Exception $e) {
+			return;
 		}
 	}
 
@@ -293,26 +295,35 @@ class AndroidRemoteControl extends eqLogic {
 		$sudo_prefix = AndroidRemoteControl::getSudoPrefix();
 		$ip_address = $this->getConfiguration('ip_address');
 
-		if ($this->getConfiguration('type_connection') == "TCPIP") {
-			log::add(__CLASS__, 'debug', "Check de la connection TCPIP");
-			$check = shell_exec($sudo_prefix . "adb devices | grep " . $ip_address . " | cut -f2 | xargs");
-		} elseif ($this->getConfiguration('type_connection') == "SSH") {
-			log::add(__CLASS__, 'debug', "Check de la connection SSH");
-		} else {
-			log::add(__CLASS__, 'debug', "Check de la connection USB");
-			$check = shell_exec($sudo_prefix . "adb devices | grep " . $ip_address . " | cut -f2 | xargs");
+		$type_connection = $this->getConfiguration('type_connection');
+		log::add(__CLASS__, 'debug', "Check de la connection " . $type_connection);
+		$check = null;
+		switch ($type_connection) {
+			case "TCPIP":
+				$check = shell_exec($sudo_prefix . "adb devices | grep " . $ip_address . " | cut -f2 | xargs");
+				break;
+			case "USB":
+				$check = shell_exec($sudo_prefix . "adb devices | grep " . $ip_address . " | cut -f2 | xargs");
+				break;
+			default :
+				log::add(__CLASS__, 'info', "Le type de connection " . $type_connection . " n’est pas pris en compte.");
 		}
-		$cmd = $this->getCmd(null, 'encours');
-		$cmd->setDisplay('icon', 'plugins/AndroidRemoteControl/desktop/images/erreur.png');
-		if (strstr($check, "offline")) {
-			log::add(__CLASS__, 'info', 'Votre appareil est offline');
-		} elseif (!strstr($check, "device")) {
-			log::add(__CLASS__, 'info', 'Votre appareil n’est pas détecté par ADB.');
-		} elseif (strstr($check, "unauthorized")) {
-			log::add(__CLASS__, 'info', 'Votre connection n’est pas autorisé');
+
+		$this->checkAndUpdateCmd('encours', $check);
+		switch ($check) {
+			case "offline":
+				log::add(__CLASS__, 'info', 'Votre appareil est offline');
+				break;
+			case "device":
+				$this->connectADB($ip_address);
+				break;
+			case "unauthorized":
+				log::add(__CLASS__, 'info', 'Votre connection n’est pas autorisé');
+				break;
+			default :
+				log::add(__CLASS__, 'info', 'Votre appareil n’est pas détecté par ADB : ' .$check . ".");
 		}
-		$this->connectADB($ip_address);
-		$cmd->save();
+		return $check === "device";
 	}
 
 	public function toHtml($_version = 'dashboard') {
