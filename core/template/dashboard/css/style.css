@@ -37,7 +37,9 @@
 	padding: 10px 5px;
 }
 
-.AndroidRemoteControl_widget .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+.AndroidRemoteControl_widget .nav-pills>li.active>a,
+.AndroidRemoteControl_widget .nav-pills>li.active>a:focus,
+.AndroidRemoteControl_widget .nav-pills>li.active>a:hover {
 	color: #fff !important;
 }
 
@@ -61,7 +63,8 @@
 	text-align: center;
 }
 
-.AndroidRemoteControl_widget .tooltipstered, .tooltipstered img {
+.AndroidRemoteControl_widget .tooltipstered,
+.AndroidRemoteControl_widget.tooltipstered img {
 	width: 30px;
 }
 
@@ -87,6 +90,7 @@
 	margin: 1px;
 }
 
-.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active i,.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active span {
+.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active i,
+.AndroidRemoteControl_widget a.nav-item.nav-link.btn.active span {
 	color: darkslateblue;
 }
