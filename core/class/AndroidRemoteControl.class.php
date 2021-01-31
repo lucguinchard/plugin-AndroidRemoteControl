@@ -80,15 +80,14 @@ class AndroidRemoteControl extends eqLogic {
 		$type_connection = $this->getConfiguration('type_connection');
 		$ip_address = $this->getConfiguration('ip_address');
 		$sudo_prefix = AndroidRemoteControl::getSudoPrefix();
-		if ($type_connection == "TCPIP") {
-			$data = shell_exec($sudo_prefix . "adb -s " . $ip_address . ":5555 " . $_cmd);
-			return $data;
-		} elseif ($type_connection == "TCPIP") {
-			$data = shell_exec($sudo_prefix . "adb " . $_cmd);
-			return $data;
-		} else {
-			
+		switch ($type_connection) {
+			case "TCPIP": 
+				$data = shell_exec($sudo_prefix . "adb -s " . $ip_address . ":5555 " . $_cmd);
+				break;
+			default :
+				$data = shell_exec($sudo_prefix . "adb " . $_cmd);
 		}
+		return $data;
 	}
 
 	public static function resetADB() {
@@ -119,14 +118,18 @@ class AndroidRemoteControl extends eqLogic {
 		}
 
 		$sudo_prefix = AndroidRemoteControl::getSudoPrefix();
-		if ($this->getConfiguration('type_connection') == "TCPIP") {
-			log::add(__CLASS__, 'debug', "Restart ADB en mode TCP");
-			$check = shell_exec($sudo_prefix . "adb devices TCPIP 5555");
-		} elseif ($this->getConfiguration('type_connection') == "SSH") {
-			log::add(__CLASS__, 'debug', "Check de la connection SSH");
-		} else {
-			log::add(__CLASS__, 'debug', "Restart ADB en mode USB");
-			$check = shell_exec($sudo_prefix . "adb devices USB");
+		$type_connection = $this->getConfiguration('type_connection');
+		switch ($type_connection) {
+			case "TCPIP":
+				log::add(__CLASS__, 'debug', "Restart ADB en mode TCP");
+				$check = shell_exec($sudo_prefix . "adb devices TCPIP 5555");
+				break;
+			case "USB":
+				log::add(__CLASS__, 'debug', "Restart ADB en mode USB");
+				$check = shell_exec($sudo_prefix . "adb devices USB");
+				break;
+			default :
+				log::add(__CLASS__, 'info', "Le type de connection " . $type_connection . " n’est pas pris en compte.");
 		}
 	}
 	
@@ -259,32 +262,27 @@ class AndroidRemoteControl extends eqLogic {
 				$this->checkAndUpdateCmd('volume', $infos['volume']);
 			}
 			if (isset($infos['play_state'])) {
-				if ($infos['play_state'] == 2) {
-					$this->checkAndUpdateCmd('play_state', "pause");
-				} elseif ($infos['play_state'] == 3) {
-					$this->checkAndUpdateCmd('play_state', "lecture");
-				} elseif ($infos['play_state'] == 0) {
-					$this->checkAndUpdateCmd('play_state', "arret");
-				} else {
-					$this->checkAndUpdateCmd('play_state', "inconnue");
+				switch ($infos['play_state']) {
+					case 0: $play_state = "arret"; break;
+					case 2: $play_state = "pause"; break;
+					case 3: $play_state = "lecture"; break;
+					default : $play_state = "inconnue:" . $infos['play_state'];
 				}
+				$this->checkAndUpdateCmd('play_state', $play_state);
 			}
 
 			if (isset($infos['battery_level'])) {
 				$this->checkAndUpdateCmd('battery_level', $infos['battery_level']);
 			}
 			if (isset($infos['battery_status'])) {
-				if ($infos['battery_status'] == 2) {
-					$this->checkAndUpdateCmd('battery_status', "en charge");
-				} elseif ($infos['battery_status'] == 3) {
-					$this->checkAndUpdateCmd('battery_status', "en décharge");
-				} elseif ($infos['battery_status'] == 4) {
-					$this->checkAndUpdateCmd('battery_status', "pas de charge");
-				} elseif ($infos['battery_status'] == 5) {
-					$this->checkAndUpdateCmd('battery_status', "pleine");
-				} else {
-					$this->checkAndUpdateCmd('battery_status', "inconnue");
+				switch ($infos['battery_status']) {
+					case 2: $battery_status = "en charge"; break;
+					case 3: $battery_status = "en décharge"; break;
+					case 4: $battery_status = "pas de charge"; break;
+					case 5: $battery_status = "pleine"; break;
+					default : $battery_status = "inconnue:" . $infos['play_state'];
 				}
+				$this->checkAndUpdateCmd('battery_status', $battery_status);
 			}
 		} catch (\Exception $e) {
 			return;
@@ -368,5 +366,4 @@ class AndroidRemoteControl extends eqLogic {
 
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__)));
 	}
-
 }
